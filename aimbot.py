@@ -1,4 +1,4 @@
-import math, keyboard
+import time, math, keyboard
 from pymeow import *
 
 
@@ -44,10 +44,18 @@ def write_angles(proc, yaw, pitch):
 
 def main():
     proc = process_by_name("ac_client.exe")
+    is_enabled = False
     while True:
         if keyboard.is_pressed("end"):
             break
-        elif keyboard.is_pressed("ctrl"):
+        elif keyboard.is_pressed("z"):
+            is_enabled = True
+            print("Aimbot enabled")
+        elif keyboard.is_pressed("x"):
+            is_enabled = False
+            print("Aimbot disabled")
+            time.sleep(0.5)
+        if is_enabled:
             player_coords, enemies = read_values(proc)
             print(
                 "Player coords:",
@@ -71,6 +79,7 @@ def main():
             print("Yaw:", yaw)
             print("Pitch:", pitch)
             print()
+        time.sleep(0.005)
 
 
 if __name__ == "__main__":
